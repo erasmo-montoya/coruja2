@@ -1,0 +1,946 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+]>
+
+
+<rdf:RDF xmlns="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#"
+     xml:base="http://www.semanticweb.org/hector/ontologies/2014/2/pucp"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp">
+        <rdfs:comment>Esta ontologia esta desarrollada en el dominio de la PUCP, centrandose a la fecha 2014 con respecto a Ingeniria Informatica</rdfs:comment>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneConcepto -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneConcepto">
+        <rdfs:range rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Concepto"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#UnidadAprendizaje"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneCurso -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneCurso">
+        <rdf:type rdf:resource="&owl;TransitiveProperty"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Curso"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Especialidad"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneEspecialidad -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneEspecialidad">
+        <rdf:type rdf:resource="&owl;TransitiveProperty"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Especialidad"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Facultad"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneProgramaAnalitico -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneProgramaAnalitico">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Curso"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#ProgramaAnalitico"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneUnidadAprendizaje -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneUnidadAprendizaje">
+        <rdf:type rdf:resource="&owl;TransitiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#ProgramaAnalitico"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#UnidadAprendizaje"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#nombrePreferente -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#nombrePreferente">
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:domain rdf:resource="&owl;Thing"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#sinonimos -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#sinonimos"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Algoritmia -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Algoritmia">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Curso"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneProgramaAnalitico"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#INF263"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#sinonimos"/>
+                <owl:hasValue>Algoritmos</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#nombrePreferente"/>
+                <owl:hasValue>Algoritmia</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Ciencias -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Ciencias">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Especialidad"/>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Ingenieria"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#CienciasIngenieria -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#CienciasIngenieria">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Facultad"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#nombrePreferente"/>
+                <owl:hasValue>Ciencias e Ingenieria</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneEspecialidad"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#IngenieriaMecanica"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneEspecialidad"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#IngenieriaElectronica"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneEspecialidad"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#IngenieriaIndustrial"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneEspecialidad"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#IngenieriaInformatica"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#ComplejidadAlgoritmos -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#ComplejidadAlgoritmos">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#UnidadAprendizaje"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneConcepto"/>
+                <owl:hasValue rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#ComplejidadAlgoritmica"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneConcepto"/>
+                <owl:hasValue rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Cuantificacion"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneConcepto"/>
+                <owl:hasValue rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#EficienciaAlgoritmica"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Concepto -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Concepto"/>
+    
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Curso -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Curso">
+        <rdfs:subClassOf rdf:resource="&owl;Thing"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#nombrePreferente"/>
+                <owl:hasValue>Curso</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#DerivacionProgramas -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#DerivacionProgramas">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#UnidadAprendizaje"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Especialidad -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Especialidad">
+        <rdfs:subClassOf rdf:resource="&owl;Thing"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#nombrePreferente"/>
+                <owl:hasValue>Especialidad</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#EstudiosGeneralesCiencias -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#EstudiosGeneralesCiencias">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Facultad"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#nombrePreferente"/>
+                <owl:hasValue>Estudios Generales Ciencias</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#sinonimos"/>
+                <owl:hasValue>EEGGCC</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#EstudiosGeneralesLetras -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#EstudiosGeneralesLetras">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Facultad"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Facultad -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Facultad">
+        <rdfs:subClassOf rdf:resource="&owl;Thing"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#nombrePreferente"/>
+                <owl:hasValue>Facultad</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#FundamentosProgramacion -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#FundamentosProgramacion">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Curso"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#nombrePreferente"/>
+                <owl:hasValue>Fundamentos de Programacion</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneProgramaAnalitico"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#INF220"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#INF220 -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#INF220">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#ProgramaAnalitico"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneUnidadAprendizaje"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#TecnicasProgramacion"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneUnidadAprendizaje"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#DerivacionProgramas"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneUnidadAprendizaje"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#ComplejidadAlgoritmos"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#nombrePreferente"/>
+                <owl:hasValue>INF220</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneUnidadAprendizaje"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#TiposDatosAbstractos"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#INF239 -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#INF239">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#ProgramaAnalitico"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#nombrePreferente"/>
+                <owl:hasValue>INF239</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#INF263 -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#INF263">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#ProgramaAnalitico"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#nombrePreferente"/>
+                <owl:hasValue>INF263</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneUnidadAprendizaje"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#PunterosVoid"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneUnidadAprendizaje"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#ProgramacionPascal"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneUnidadAprendizaje"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#ProgramacionDinamica"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#INF281 -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#INF281">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#ProgramaAnalitico"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#nombrePreferente"/>
+                <owl:hasValue>INF281</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneUnidadAprendizaje"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#ProgramacionOrientadaObjetos"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Ingenieria -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Ingenieria">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Especialidad"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#nombrePreferente"/>
+                <owl:hasValue>Ingenieria</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#IngenieriaElectronica -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#IngenieriaElectronica">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Ingenieria"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#IngenieriaIndustrial -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#IngenieriaIndustrial">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Ingenieria"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#IngenieriaInformatica -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#IngenieriaInformatica">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Ingenieria"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneCurso"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#FundamentosProgramacion"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneCurso"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#SistemasOperativos"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneCurso"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Algoritmia"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneCurso"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#LenguajesProgramacion"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#IngenieriaMecanica -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#IngenieriaMecanica">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Ingenieria"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#LenguajesProgramacion -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#LenguajesProgramacion">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Curso"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneProgramaAnalitico"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#INF281"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#LetrasCienciasHumanas -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#LetrasCienciasHumanas">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Facultad"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#ProgramaAnalitico -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#ProgramaAnalitico">
+        <rdfs:subClassOf rdf:resource="&owl;Thing"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneUnidadAprendizaje"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#UnidadAprendizaje"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#nombrePreferente"/>
+                <owl:hasValue>Programa analitico</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#ProgramacionDinamica -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#ProgramacionDinamica">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#UnidadAprendizaje"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneConcepto"/>
+                <owl:hasValue rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Fibonacci"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#nombrePreferente"/>
+                <owl:hasValue>Programacion dinamica</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneConcepto"/>
+                <owl:hasValue rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#BinPacking"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#ProgramacionOrientadaObjetos -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#ProgramacionOrientadaObjetos">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#UnidadAprendizaje"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#nombrePreferente"/>
+                <owl:hasValue>Programacion Orientada a objetos</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#sinonimos"/>
+                <owl:hasValue>POO</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#ProgramacionPascal -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#ProgramacionPascal">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#UnidadAprendizaje"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneConcepto"/>
+                <owl:hasValue rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Cadenas"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#nombrePreferente"/>
+                <owl:hasValue>Programacion en Pascal</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#PunterosVoid -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#PunterosVoid">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#UnidadAprendizaje"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#nombrePreferente"/>
+                <owl:hasValue>Punteros Void</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#SistemasOperativos -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#SistemasOperativos">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Curso"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneProgramaAnalitico"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#INF239"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#TecnicasProgramacion -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#TecnicasProgramacion">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#UnidadAprendizaje"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#TiposDatosAbstractos -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#TiposDatosAbstractos">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#UnidadAprendizaje"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneConcepto"/>
+                <owl:hasValue rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Arboles"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneConcepto"/>
+                <owl:hasValue rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Cadenas"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneConcepto"/>
+                <owl:hasValue rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#TAD"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#nombrePreferente"/>
+                <owl:hasValue>Tipos de datos abstractos</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#UnidadAprendizaje -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#UnidadAprendizaje">
+        <rdfs:subClassOf rdf:resource="&owl;Thing"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#nombrePreferente"/>
+                <owl:hasValue>Unidad de Aprendizaje</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3.org/2002/07/owl#Thing -->
+
+    <rdf:Description rdf:about="&owl;Thing">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#nombrePreferente"/>
+                <owl:someValuesFrom rdf:resource="&xsd;string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#sinonimos"/>
+                <owl:someValuesFrom rdf:resource="&xsd;string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </rdf:Description>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Arboles -->
+
+    <owl:Thing rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Arboles">
+        <rdf:type rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Concepto"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+        <sinonimos>raiz</sinonimos>
+        <sinonimos>arbol</sinonimos>
+        <sinonimos>arboles</sinonimos>
+        <sinonimos>rama</sinonimos>
+        <sinonimos>recorrido</sinonimos>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#BinPacking -->
+
+    <owl:Thing rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#BinPacking">
+        <rdf:type rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Concepto"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+        <rdf:type>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#sinonimos"/>
+                <owl:hasValue>Problema de la Mochila</owl:hasValue>
+            </owl:Restriction>
+        </rdf:type>
+        <rdf:type>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#nombrePreferente"/>
+                <owl:hasValue>Bin Packing</owl:hasValue>
+            </owl:Restriction>
+        </rdf:type>
+        <sinonimos>binpacking</sinonimos>
+        <sinonimos>problema de la mochila</sinonimos>
+        <sinonimos>packing</sinonimos>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Cadenas -->
+
+    <owl:Thing rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Cadenas">
+        <rdf:type rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Concepto"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+        <sinonimos>string</sinonimos>
+        <sinonimos>cadena</sinonimos>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#ComplejidadAlgoritmica -->
+
+    <owl:Thing rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#ComplejidadAlgoritmica">
+        <rdf:type rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Concepto"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Conjuntos -->
+
+    <owl:Thing rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Conjuntos">
+        <rdf:type rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Concepto"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+        <sinonimos>conjunto</sinonimos>
+        <sinonimos>disjunto</sinonimos>
+        <sinonimos>elemento</sinonimos>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Cuantificacion -->
+
+    <owl:Thing rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Cuantificacion">
+        <rdf:type rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Concepto"/>
+        <rdf:type rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#DerivacionProgramas"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#EficienciaAlgoritmica -->
+
+    <owl:Thing rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#EficienciaAlgoritmica">
+        <rdf:type rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Concepto"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#EspecifacionAlgebraica -->
+
+    <owl:Thing rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#EspecifacionAlgebraica">
+        <rdf:type rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Concepto"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Fibonacci -->
+
+    <owl:Thing rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Fibonacci">
+        <rdf:type rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Concepto"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+        <sinonimos>fibonacci</sinonimos>
+        <sinonimos>fibon</sinonimos>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#GCL -->
+
+    <owl:Thing rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#GCL">
+        <rdf:type rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Concepto"/>
+        <rdf:type rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#DerivacionProgramas"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Predicados -->
+
+    <owl:Thing rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Predicados">
+        <rdf:type rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Concepto"/>
+        <rdf:type rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#DerivacionProgramas"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#TAD -->
+
+    <owl:Thing rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#TAD">
+        <rdf:type rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Concepto"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+        <sinonimos>abstractos</sinonimos>
+        <sinonimos>datos</sinonimos>
+        <sinonimos>tipos</sinonimos>
+        <sinonimos>tad</sinonimos>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#TiempoEjecucion -->
+
+    <owl:Thing rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#TiempoEjecucion">
+        <rdf:type rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Concepto"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+        <sinonimos>ejecucion</sinonimos>
+    </owl:Thing>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description>
+        <rdf:type rdf:resource="&owl;AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#INF220"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#INF239"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#INF263"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#INF281"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="&owl;AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#ProgramacionDinamica"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#ProgramacionOrientadaObjetos"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#ProgramacionPascal"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#PunterosVoid"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#TiposDatosAbstractos"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="&owl;AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#ComplejidadAlgoritmos"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#DerivacionProgramas"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#TecnicasProgramacion"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="&owl;AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Algoritmia"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#FundamentosProgramacion"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#LenguajesProgramacion"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#SistemasOperativos"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="&owl;AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Curso"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Especialidad"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Facultad"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#ProgramaAnalitico"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#UnidadAprendizaje"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="&owl;AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#IngenieriaElectronica"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#IngenieriaIndustrial"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#IngenieriaInformatica"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#IngenieriaMecanica"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="&owl;AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#CienciasIngenieria"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#EstudiosGeneralesCiencias"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#EstudiosGeneralesLetras"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#LetrasCienciasHumanas"/>
+        </owl:members>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.4.2) http://owlapi.sourceforge.net -->
+

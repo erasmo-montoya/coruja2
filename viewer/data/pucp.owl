@@ -1,0 +1,399 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+]>
+
+
+<rdf:RDF xmlns="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#"
+     xml:base="http://www.semanticweb.org/hector/ontologies/2014/2/pucp"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp">
+        <rdfs:comment>Coruja</rdfs:comment>
+    </owl:Ontology>
+
+
+
+    <!--
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#apareceEn -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#apareceEn">
+        <rdfs:range rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Asertos"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneTemas"/>
+    </owl:ObjectProperty>
+
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneCursos -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneCursos">
+        <rdfs:range rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Curso"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Especialidad"/>
+    </owl:ObjectProperty>
+
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneEspecialidades -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneEspecialidades">
+        <rdfs:range rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Especialidad"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Facultad"/>
+    </owl:ObjectProperty>
+
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneFacultades -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneFacultades">
+        <rdfs:range rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Facultad"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#PUCP"/>
+    </owl:ObjectProperty>
+
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneTemas -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneTemas">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Curso"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Tema"/>
+    </owl:ObjectProperty>
+
+
+
+    <!--
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Asertos -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Asertos">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:oneOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#PC1"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#PC2"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#E1"/>
+                </owl:oneOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Tema"/>
+    </owl:Class>
+
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#CienciasIngenieria -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#CienciasIngenieria">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Facultad"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneEspecialidades"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#IngenieriaMecatronica"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneEspecialidades"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#IngenieriaIndustrial"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneEspecialidades"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#IngenieriaInformatica"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Especialidad"/>
+    </owl:Class>
+
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Curso -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Curso"/>
+
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#EEGGCC -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#EEGGCC">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Facultad"/>
+    </owl:Class>
+
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Especialidad -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Especialidad">
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#PUCP"/>
+    </owl:Class>
+
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Facultad -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Facultad">
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#PUCP"/>
+    </owl:Class>
+
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Fisica -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Fisica">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Especialidad"/>
+    </owl:Class>
+
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#FundamentosProgramacion -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#FundamentosProgramacion">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Curso"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneTemas"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#TiposDatosAbstractos"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneTemas"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Asertos"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#IngenieriaCivil -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#IngenieriaCivil">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Especialidad"/>
+    </owl:Class>
+
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#IngenieriaElectronica -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#IngenieriaElectronica">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Especialidad"/>
+    </owl:Class>
+
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#IngenieriaIndustrial -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#IngenieriaIndustrial">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Especialidad"/>
+    </owl:Class>
+
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#IngenieriaInformatica -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#IngenieriaInformatica">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Especialidad"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneCursos"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#SistemasOperativos"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneCursos"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#FundamentosProgramacion"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#tieneCursos"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#LenguajesProgramacion1"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#IngenieriaMecatronica -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#IngenieriaMecatronica">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Especialidad"/>
+    </owl:Class>
+
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#LenguajesProgramacion1 -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#LenguajesProgramacion1">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Curso"/>
+    </owl:Class>
+
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#LetrasCienciasHumanas -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#LetrasCienciasHumanas">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Facultad"/>
+    </owl:Class>
+
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Matematica -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Matematica">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Especialidad"/>
+    </owl:Class>
+
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#PUCP -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#PUCP"/>
+
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Quimica -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Quimica">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Especialidad"/>
+    </owl:Class>
+
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#SistemasOperativos -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#SistemasOperativos">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Curso"/>
+    </owl:Class>
+
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Tema -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Tema">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Asertos"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#TiposDatosAbstractos"/>
+                </owl:unionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+    </owl:Class>
+
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#TiposDatosAbstractos -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#TiposDatosAbstractos">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:oneOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#PC1"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#PC2"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#E1"/>
+                </owl:oneOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Tema"/>
+    </owl:Class>
+
+
+
+    <!--
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Asertos -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#Asertos">
+        <owl:sameAs rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#PC1"/>
+    </owl:NamedIndividual>
+
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#E1 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#E1">
+        <rdf:type rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#TiposDatosAbstractos"/>
+    </owl:NamedIndividual>
+
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#PC1 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#PC1">
+        <rdf:type rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#TiposDatosAbstractos"/>
+    </owl:NamedIndividual>
+
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#PC2 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#PC2">
+        <rdf:type rdf:resource="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#TiposDatosAbstractos"/>
+    </owl:NamedIndividual>
+
+
+
+    <!-- http://www.semanticweb.org/hector/ontologies/2014/2/pucp#TiposDatosAbstractos -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#TiposDatosAbstractos"/>
+
+
+
+    <!--
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description>
+        <rdf:type rdf:resource="&owl;AllDifferent"/>
+        <owl:distinctMembers rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#E1"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#PC1"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/hector/ontologies/2014/2/pucp#PC2"/>
+        </owl:distinctMembers>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.4.2) http://owlapi.sourceforge.net -->
