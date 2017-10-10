@@ -1,43 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <title>Coruja</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/css/jasny-bootstrap.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/js/jasny-bootstrap.js"></script>
-  <link href='../resources/css/styles.css' type="text/css" rel="stylesheet">
-</head>
-<body>
-
-<div class="container-fluid">
-  <div class="row content">
-    <div class="col-sm-3 sidenav">
-      <h4>Coruja Viewer</h4>
-      <ul class="nav nav-pills nav-stacked">
-        <li><a href="../">Home</a></li>
-        <li><a href="../annotator">Annotator</a></li>
-        <li class="active"><a href=".">Viewer</a></li>
-        <li><a href="../configuration">Configuration</a></li>
-      </ul><br>
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="Search Document..">
-        <span class="input-group-btn">
-          <button class="btn btn-default" type="button">
-            <span class="glyphicon glyphicon-search"></span>
-          </button>
-        </span>
+   <head>
+      <title>Coruja</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/css/jasny-bootstrap.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/js/jasny-bootstrap.js"></script>
+      <link rel="stylesheet" href="../resources/fa/css/font-awesome.min.css">
+      <link href='../resources/css/styles.css' type="text/css" rel="stylesheet">
+   </head>
+   <body>
+      <div class="container-fluid">
+         <div class="row content">
+            <div class="col-sm-3 sidenav">
+               <h4>Coruja Viewer</h4>
+               <ul class="nav nav-pills nav-stacked">
+                  <li><a href="../">Home</a></li>
+                  <li><a href="../annotator">Annotator</a></li>
+                  <li class="active"><a href=".">Viewer</a></li>
+                  <li><a href="../configuration">Configuration</a></li>
+               </ul>
+               <br>
+               <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Search Document..">
+                  <span class="input-group-btn">
+                  <button class="btn btn-default" type="button">
+                  <span class="glyphicon glyphicon-search"></span>
+                  </button>
+                  </span>
+               </div>
+            </div>
+            <div class="col-sm-9">
+               <h4>Ontology Viewer</h4>
+               <div class="embed-container">
+                  <iframe width="100%"  height="400" src="http://visualdataweb.de/webvowl/" marginwidth="50" frameborder="0" allowfullscreen></iframe>
+               </div>
+               <hr>
+               <h4>Enter search terms here:</h4>
+               <div class="form-group">
+                  <div class="input-group">
+                     <input type="text" class="form-control"
+                        placeholder="Example: Machine Learning" id="inputGroup"/>
+                     <span class="input-group-addon">
+                     <i class="fa fa-search"></i>
+                     </span>
+                  </div>
+               </div>
+               <h4>Results:</h4>
+               <div class="row">
+                  <!-- Boxes de Acoes -->
+                  <div class="col-xs-12 col-sm-6 col-lg-4">
+                     <div class="box">
+                        <div class="icon">
+                           <div class="image"><i class="fa fa-thumbs-o-up"></i></div>
+                           <div class="info">
+                              <h3 class="title">Relations</h3>
+                              <p>
+                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed in lobortis nisl, vitae iaculis sapien. Phasellus ultrices gravida massa luctus ornare. Suspendisse blandit quam elit, eu imperdiet neque semper.
+                              </p>
+                              <div class="more">
+                                 <a href="#" title="Title Link">
+                                 Read More <i class="fa fa-angle-double-right"></i>
+                                 </a>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="space"></div>
+                     </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-6 col-lg-4">
+                     <div class="box">
+                        <div class="icon">
+                           <div class="image"><i class="fa fa-flag"></i></div>
+                           <div class="info">
+                              <h3 class="title">Icons by Font Awesome</h3>
+                              <p>
+                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed in lobortis nisl, vitae iaculis sapien. Phasellus ultrices gravida massa luctus ornare. Suspendisse blandit quam elit, eu imperdiet neque semper.
+                              </p>
+                              <div class="more">
+                                 <a href="#" title="Title Link">
+                                 Read More <i class="fa fa-angle-double-right"></i>
+                                 </a>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="space"></div>
+                     </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-6 col-lg-4">
+                     <div class="box">
+                        <div class="icon">
+                           <div class="image"><i class="fa fa-desktop"></i></div>
+                           <div class="info">
+                              <h3 class="title">Desktop Friendly</h3>
+                              <p>
+                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed in lobortis nisl, vitae iaculis sapien. Phasellus ultrices gravida massa luctus ornare. Suspendisse blandit quam elit, eu imperdiet neque semper.
+                              </p>
+                              <div class="more">
+                                 <a href="#" title="Title Link">
+                                 Read More <i class="fa fa-angle-double-right"></i>
+                                 </a>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="space"></div>
+                     </div>
+                  </div>
+                  <!-- /Boxes de Acoes -->
+               </div>
+            </div>
+         </div>
       </div>
-    </div>
-  </div>
-</div>
-
-<footer class="container-fluid">
-  <p>Footer Text</p>
-</footer>
-
-</body>
+      <footer class="container-fluid">
+         <p>Footer Text</p>
+      </footer>
+   </body>
 </html>
