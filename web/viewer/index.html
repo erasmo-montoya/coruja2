@@ -6,13 +6,255 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/css/jasny-bootstrap.css">
+      <link rel="stylesheet" href="../resources/css/flexslider.css">
+      <link rel="stylesheet" href="../resources/css/jquery.fancybox.css">
+      <link rel="stylesheet" href="../resources/css/responsive.css">
+      <link rel="stylesheet" href="../resources/css/animate.min.css">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/js/jasny-bootstrap.js"></script>
+      <link rel="stylesheet" href="../resources/styles/graph.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+      <script src="https://d3js.org/d3.v3.min.js"></script>
+      <script src="../resources/js/rdflib.min.js"></script>
+      <script src="../resources/js/FOAF.js"></script>
+      <script src="../resources/js/graph.js"></script>
+      <script src="../resources/js/utils.js"></script>
       <link rel="stylesheet" href="../resources/fa/css/font-awesome.min.css">
       <link href='../resources/css/styles.css' type="text/css" rel="stylesheet">
    </head>
    <body>
+     <script>
+         var svg = d3.select("#svg-body")
+                     .append("svg")
+     				.attr("width", 800)
+     				.attr("height", 600);
+     	  var force = d3.layout.force().size([800, 600]);
+         var graph;
+         var triples;
+         var store = $rdf.graph()
+         triples = [];
+         var personHash = "";
+     	var availableTags = [];
+
+         $('#CreateKnowRelationForm').submit(function( event ) {
+         	var firstPerson = $("#FirstPerson").find(":selected").attr("value");
+         	var secondPerson = $("#SecondPerson").find(":selected").attr("value");
+         	//console.log(firstPerson);
+         	//console.log(secondPerson);
+             AddFoafKnowToD3(firstPerson, secondPerson);
+             AddFOAFKnowToXML(firstPerson, secondPerson);
+             updateRDFGraphs();
+             event.preventDefault();
+         });
+
+         $('#CreatePersonForm').submit(function( event ) {
+             personHash = getHashId(5);
+             AddFoafKnowToD32();
+             AddFOAFKnowToXML2();
+             updateRDFGraphs();
+             event.preventDefault();
+         });
+
+         $('#CreatePersonForm2').submit(function( event ) {
+     		ReadFile();
+             event.preventDefault();
+         });
+         $('#DownloadXmlForm').submit(function( event ) {
+     		$rdf.serialize(undefined, store, undefined, 'application/rdf+xml', function(err, str) {
+             	download("my_foaf_document.rdf",str);
+             });
+             event.preventDefault();
+         });
+
+         function AddAvailableTags() {
+             $(".person-select" ).html("");
+         	$(triples).each(function(index, triple) {
+             	if (triple.predicate == FOAF.NAME.value) {
+             		console.log(triple.object);
+             		$(".person-select" ).append("<option value=\"" + triple.subject + "\">"+ triple.object +"</option>");
+             		availableTags.push(triple.object);
+             	}
+             });
+         }
+
+
+         function AddFoafKnowToD3(firstPerson, secondPerson){
+             /*var firtsPersonName  = $('#FirstPerson').val();
+             var secondPersonName = $('#SecondPerson').val();
+             var firtsPerson = FOAF.PERSON(firtsPersonName);
+             var secondPerson = FOAF.PERSON(secondPersonName);*/
+             var triple = new Triple();
+             triple.subject = firstPerson;
+             triple.predicate = FOAF.KNOWS.value;
+             triple.object = secondPerson;
+             triples.push(triple);
+         }
+
+
+         function AddFoafKnowToD32(){
+             var personGivenName  = $('#PersonGivenName').val();
+             var personFamilyName  = $('#PersonFamilyName').val();
+             var personName  = personGivenName + " " + personFamilyName;//$('#PersonName').val();
+             var personHomepage = $('#PersonHomepage').val();
+             var personNick = $('#PersonNick').val();
+             var firtsPerson = FOAF.PERSON(personGivenName + "_" + personHash);
+             triple = new Triple();
+             triple.subject = firtsPerson.value;
+             triple.predicate = FOAF.NAME.value;
+             triple.object = personName
+             triples.push(triple);
+             triple = new Triple();
+             triple.subject = firtsPerson.value;
+             triple.predicate = FOAF.GIVEN_NAME.value;
+             triple.object = personGivenName
+             triples.push(triple);
+             triple = new Triple();
+             triple.subject = firtsPerson.value;
+             triple.predicate = FOAF.FAMILY_NAME.value;
+             triple.object = personFamilyName
+             triples.push(triple);
+             triple = new Triple();
+             triple.subject = firtsPerson.value;
+             triple.predicate = FOAF.HOME_PAGE.value;
+             triple.object = personHomepage
+             triples.push(triple);
+             triple = new Triple();
+             triple.subject = firtsPerson.value;
+             triple.predicate = FOAF.NICK.value;
+             triple.object = personNick
+             triples.push(triple);
+         }
+
+         function AddFOAFKnowToXML(firstPerson, secondPerson){
+             /*var firtsPersonName  = $('#FirstPerson').val();
+             var secondPersonName = $('#SecondPerson').val();
+             var firtsPerson = FOAF.PERSON(firtsPersonName);
+             var secondPerson = FOAF.PERSON(secondPersonName);
+             store.add(firtsPerson, FOAF.NAME, FOAF.STRING(firtsPersonName));
+             store.add(secondPerson, FOAF.NAME, FOAF.STRING(secondPersonName));*/
+             var fp = $rdf.sym(firstPerson);
+             var sp = $rdf.sym(secondPerson);
+             store.add(fp,FOAF.KNOWS,sp);
+         }
+
+         function AddFOAFKnowToXML2(){
+             var personGivenName  = $('#PersonGivenName').val();
+             var personFamilyName  = $('#PersonFamilyName').val();
+             var personName  = personGivenName + " " + personFamilyName;
+             var personHomepage = $('#PersonHomepage').val();
+             var personNick = $('#PersonNick').val();
+             var person = FOAF.PERSON(personGivenName + "_" + personHash);
+             store.add(person, FOAF.NAME, FOAF.STRING(personName));
+             store.add(person, FOAF.GIVEN_NAME, FOAF.STRING(personGivenName));
+             store.add(person, FOAF.FAMILY_NAME, FOAF.STRING(personFamilyName));
+             store.add(person, FOAF.HOME_PAGE, FOAF.STRING(personHomepage));
+             store.add(person, FOAF.NICK, FOAF.STRING(personNick));
+         }
+
+         function AddFOAFPersonToXML3(person){
+             var personGivenName  = person.GivenName;
+             var personFamilyName  = person.FamilyName;
+             var personName  = personGivenName + " " + personFamilyName;
+             var personHomepage = person.Homepage;
+             var personNick = person.Nick;
+             var person = FOAF.PERSON(person.Id);
+             store.add(person, FOAF.NAME, FOAF.STRING(personName));
+             store.add(person, FOAF.GIVEN_NAME, FOAF.STRING(personGivenName));
+             store.add(person, FOAF.FAMILY_NAME, FOAF.STRING(personFamilyName));
+             store.add(person, FOAF.HOME_PAGE, FOAF.STRING(personHomepage));
+             store.add(person, FOAF.NICK, FOAF.STRING(personNick));
+         }
+
+         function updateRDFGraphs(){
+             AddAvailableTags();
+             $rdf.serialize(undefined, store, undefined, 'application/rdf+xml', function(err, str) {
+                 $('#DocumentContent').text(str);
+             });
+             graph = triplesToGraph(triples);
+             update();
+         }
+
+         function Triple(){
+             this.subject="";
+             this.predicate="";
+             this.object="";
+             return this;
+         }
+         function ReadFile() {
+       	    var fileInput = document.getElementById("PersonFile");
+               var reader = new FileReader();
+               reader.onload = function () {
+               	var csv = event.target.result;
+             		var data = processData(csv);
+             		$(data).each(function(index,elem){
+       				//console.log(elem);
+               elem.Id = elem.Id + "_" + elem.GivenName + "_" + getHashId(5);
+       				AddFoafPersonToD33(elem);
+       				AddFOAFPersonToXML3(elem);
+             		});
+             		updateRDFGraphs();
+               };
+               // start reading the file. When it is done, calls the onload event defined above.
+               reader.readAsBinaryString(fileInput.files[0]);
+       	}
+
+       	function processData(csv) {
+               var allTextLines = csv.split(/\r\n|\n/);
+               var people = [];
+               var headers = [];
+               for (var i=0; i<allTextLines.length; i++) {
+               	if (i == 0) {
+               		headers = allTextLines[i].split(',');
+               		continue;
+               	}
+                   var data = allTextLines[i].split(',');
+                   var tarr = [];
+                   var obj = {};
+                   for (var j=0; j<data.length; j++) {
+                   	var index = headers[j];
+                       obj[index] = data[j];
+                   }
+                   people.push(obj);
+               }
+             	return people;
+           }
+
+           function AddFoafPersonToD33(person){
+               var personGivenName  = person.GivenName
+               var personFamilyName  = person.FamilyName
+               var personName  = personGivenName + " " + personFamilyName;
+               var personHomepage = person.Homepage;
+               var personNick = person.Nick;
+               var firtsPerson = FOAF.PERSON(person.Id);
+               triple = new Triple();
+               triple.subject = firtsPerson.value;
+               triple.predicate = FOAF.NAME.value;
+               triple.object = personName;
+               triples.push(triple);
+               triple = new Triple();
+               triple.subject = firtsPerson.value;
+               triple.predicate = FOAF.GIVEN_NAME.value;
+               triple.object = personGivenName;
+               triples.push(triple);
+               triple = new Triple();
+               triple.subject = firtsPerson.value;
+               triple.predicate = FOAF.FAMILY_NAME.value;
+               triple.object = personFamilyName;
+               triples.push(triple);
+               triple = new Triple();
+               triple.subject = firtsPerson.value;
+               triple.predicate = FOAF.HOME_PAGE.value;
+               triple.object = personHomepage;
+               triples.push(triple);
+               triple = new Triple();
+               triple.subject = firtsPerson.value;
+               triple.predicate = FOAF.NICK.value;
+               triple.object = personNick;
+               triples.push(triple);
+           }
+
+     </script>
       <div class="container-fluid">
          <div class="row content">
             <div class="col-sm-3 sidenav">
@@ -36,8 +278,28 @@
             <div class="col-sm-9">
                <h4>Ontology Viewer</h4>
                <div class="embed-container">
-                  <iframe width="100%"  height="400" src="http://visualdataweb.de/webvowl/" marginwidth="50" frameborder="0" allowfullscreen></iframe>
+                  <!--<iframe width="100%"  height="400" src="http://visualdataweb.de/webvowl/" marginwidth="50" frameborder="0" allowfullscreen></iframe>
+                  -->
+                  <form id="CreatePersonForm2">
+                     <div class="form-group">
+                         <label for="PersonFile">Person File:</label>
+                         <input type="file" class="form-control" id="PersonFile">
+                     </div>
+                     <button type="submit" class="btn btn-default">Upload Persons</button>
+                  </form>
                </div>
+                   <div class="row">
+                     <div class="col-xs-12 col-sm-6 ">
+                           <pre class = "doc1" id="DocumentContent" style="margin-top: 24px;"></pre>
+                           <form id="DownloadXmlForm">
+                               <button type="submit" class="btn btn-default">Download</button>
+                           </form>
+                       </div>
+
+                       <div class="col-xs-12 col-sm-6 ">
+                           <div id="svg-body" class="panel-body" style="margin-top: 8px;"></div>
+                       </div>
+                   </div>
                <hr>
                <h4>Enter search terms here:</h4>
                <div class="form-group">
@@ -115,6 +377,238 @@
             </div>
          </div>
       </div>
+      <script>
+          var svg = d3.select("#svg-body")
+                      .append("svg")
+      				.attr("width", 800)
+      				.attr("height", 800);
+      	  var force = d3.layout.force().size([800, 800]);
+          var graph;
+          var triples;
+          var store = $rdf.graph()
+          triples = [];
+          var personHash = "";
+      	var availableTags = [];
+
+          $('#CreateKnowRelationForm').submit(function( event ) {
+          	var firstPerson = $("#FirstPerson").find(":selected").attr("value");
+          	var secondPerson = $("#SecondPerson").find(":selected").attr("value");
+          	//console.log(firstPerson);
+          	//console.log(secondPerson);
+              AddFoafKnowToD3(firstPerson, secondPerson);
+              AddFOAFKnowToXML(firstPerson, secondPerson);
+              updateRDFGraphs();
+              event.preventDefault();
+          });
+
+          $('#CreatePersonForm').submit(function( event ) {
+              personHash = getHashId(5);
+              AddFoafKnowToD32();
+              AddFOAFKnowToXML2();
+              updateRDFGraphs();
+              event.preventDefault();
+          });
+
+          $('#CreatePersonForm2').submit(function( event ) {
+      		ReadFile();
+              event.preventDefault();
+          });
+          $('#DownloadXmlForm').submit(function( event ) {
+      		$rdf.serialize(undefined, store, undefined, 'application/rdf+xml', function(err, str) {
+              	download("my_foaf_document.rdf",str);
+              });
+              event.preventDefault();
+          });
+
+          function AddAvailableTags() {
+              $(".person-select" ).html("");
+          	$(triples).each(function(index, triple) {
+              	if (triple.predicate == FOAF.NAME.value) {
+              		console.log(triple.object);
+              		$(".person-select" ).append("<option value=\"" + triple.subject + "\">"+ triple.object +"</option>");
+              		availableTags.push(triple.object);
+              	}
+              });
+          }
+
+
+          function AddFoafKnowToD3(firstPerson, secondPerson){
+              /*var firtsPersonName  = $('#FirstPerson').val();
+              var secondPersonName = $('#SecondPerson').val();
+              var firtsPerson = FOAF.PERSON(firtsPersonName);
+              var secondPerson = FOAF.PERSON(secondPersonName);*/
+              var triple = new Triple();
+              triple.subject = firstPerson;
+              triple.predicate = FOAF.KNOWS.value;
+              triple.object = secondPerson;
+              triples.push(triple);
+          }
+
+
+          function AddFoafKnowToD32(){
+              var personGivenName  = $('#PersonGivenName').val();
+              var personFamilyName  = $('#PersonFamilyName').val();
+              var personName  = personGivenName + " " + personFamilyName;//$('#PersonName').val();
+              var personHomepage = $('#PersonHomepage').val();
+              var personNick = $('#PersonNick').val();
+              var firtsPerson = FOAF.PERSON(personGivenName + "_" + personHash);
+              triple = new Triple();
+              triple.subject = firtsPerson.value;
+              triple.predicate = FOAF.NAME.value;
+              triple.object = personName
+              triples.push(triple);
+              triple = new Triple();
+              triple.subject = firtsPerson.value;
+              triple.predicate = FOAF.GIVEN_NAME.value;
+              triple.object = personGivenName
+              triples.push(triple);
+              triple = new Triple();
+              triple.subject = firtsPerson.value;
+              triple.predicate = FOAF.FAMILY_NAME.value;
+              triple.object = personFamilyName
+              triples.push(triple);
+              triple = new Triple();
+              triple.subject = firtsPerson.value;
+              triple.predicate = FOAF.HOME_PAGE.value;
+              triple.object = personHomepage
+              triples.push(triple);
+              triple = new Triple();
+              triple.subject = firtsPerson.value;
+              triple.predicate = FOAF.NICK.value;
+              triple.object = personNick
+              triples.push(triple);
+          }
+
+          function AddFOAFKnowToXML(firstPerson, secondPerson){
+              /*var firtsPersonName  = $('#FirstPerson').val();
+              var secondPersonName = $('#SecondPerson').val();
+              var firtsPerson = FOAF.PERSON(firtsPersonName);
+              var secondPerson = FOAF.PERSON(secondPersonName);
+              store.add(firtsPerson, FOAF.NAME, FOAF.STRING(firtsPersonName));
+              store.add(secondPerson, FOAF.NAME, FOAF.STRING(secondPersonName));*/
+              var fp = $rdf.sym(firstPerson);
+              var sp = $rdf.sym(secondPerson);
+              store.add(fp,FOAF.KNOWS,sp);
+          }
+
+          function AddFOAFKnowToXML2(){
+              var personGivenName  = $('#PersonGivenName').val();
+              var personFamilyName  = $('#PersonFamilyName').val();
+              var personName  = personGivenName + " " + personFamilyName;
+              var personHomepage = $('#PersonHomepage').val();
+              var personNick = $('#PersonNick').val();
+              var person = FOAF.PERSON(personGivenName + "_" + personHash);
+              store.add(person, FOAF.NAME, FOAF.STRING(personName));
+              store.add(person, FOAF.GIVEN_NAME, FOAF.STRING(personGivenName));
+              store.add(person, FOAF.FAMILY_NAME, FOAF.STRING(personFamilyName));
+              store.add(person, FOAF.HOME_PAGE, FOAF.STRING(personHomepage));
+              store.add(person, FOAF.NICK, FOAF.STRING(personNick));
+          }
+
+          function AddFOAFPersonToXML3(person){
+              var personGivenName  = person.GivenName;
+              var personFamilyName  = person.FamilyName;
+              var personName  = personGivenName + " " + personFamilyName;
+              var personHomepage = person.Homepage;
+              var personNick = person.Nick;
+              var person = FOAF.PERSON(person.Id);
+              store.add(person, FOAF.NAME, FOAF.STRING(personName));
+              store.add(person, FOAF.GIVEN_NAME, FOAF.STRING(personGivenName));
+              store.add(person, FOAF.FAMILY_NAME, FOAF.STRING(personFamilyName));
+              store.add(person, FOAF.HOME_PAGE, FOAF.STRING(personHomepage));
+              store.add(person, FOAF.NICK, FOAF.STRING(personNick));
+          }
+
+          function updateRDFGraphs(){
+              AddAvailableTags();
+              $rdf.serialize(undefined, store, undefined, 'application/rdf+xml', function(err, str) {
+                  $('#DocumentContent').text(str);
+              });
+              graph = triplesToGraph(triples);
+              update();
+          }
+
+          function Triple(){
+              this.subject="";
+              this.predicate="";
+              this.object="";
+              return this;
+          }
+          function ReadFile() {
+        	    var fileInput = document.getElementById("PersonFile");
+                var reader = new FileReader();
+                reader.onload = function () {
+                	var csv = event.target.result;
+              		var data = processData(csv);
+              		$(data).each(function(index,elem){
+        				//console.log(elem);
+                elem.Id = elem.Id + "_" + elem.GivenName + "_" + getHashId(5);
+        				AddFoafPersonToD33(elem);
+        				AddFOAFPersonToXML3(elem);
+              		});
+              		updateRDFGraphs();
+                };
+                // start reading the file. When it is done, calls the onload event defined above.
+                reader.readAsBinaryString(fileInput.files[0]);
+        	}
+
+        	function processData(csv) {
+                var allTextLines = csv.split(/\r\n|\n/);
+                var people = [];
+                var headers = [];
+                for (var i=0; i<allTextLines.length; i++) {
+                	if (i == 0) {
+                		headers = allTextLines[i].split(',');
+                		continue;
+                	}
+                    var data = allTextLines[i].split(',');
+                    var tarr = [];
+                    var obj = {};
+                    for (var j=0; j<data.length; j++) {
+                    	var index = headers[j];
+                        obj[index] = data[j];
+                    }
+                    people.push(obj);
+                }
+              	return people;
+            }
+
+            function AddFoafPersonToD33(person){
+                var personGivenName  = person.GivenName
+                var personFamilyName  = person.FamilyName
+                var personName  = personGivenName + " " + personFamilyName;
+                var personHomepage = person.Homepage;
+                var personNick = person.Nick;
+                var firtsPerson = FOAF.PERSON(person.Id);
+                triple = new Triple();
+                triple.subject = firtsPerson.value;
+                triple.predicate = FOAF.NAME.value;
+                triple.object = personName;
+                triples.push(triple);
+                triple = new Triple();
+                triple.subject = firtsPerson.value;
+                triple.predicate = FOAF.GIVEN_NAME.value;
+                triple.object = personGivenName;
+                triples.push(triple);
+                triple = new Triple();
+                triple.subject = firtsPerson.value;
+                triple.predicate = FOAF.FAMILY_NAME.value;
+                triple.object = personFamilyName;
+                triples.push(triple);
+                triple = new Triple();
+                triple.subject = firtsPerson.value;
+                triple.predicate = FOAF.HOME_PAGE.value;
+                triple.object = personHomepage;
+                triples.push(triple);
+                triple = new Triple();
+                triple.subject = firtsPerson.value;
+                triple.predicate = FOAF.NICK.value;
+                triple.object = personNick;
+                triples.push(triple);
+            }
+
+      </script>
+
       <footer class="container-fluid">
          <p>Footer Text</p>
       </footer>
